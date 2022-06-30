@@ -7,9 +7,9 @@
 name: "Ruby on Rails CI"
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -20,16 +20,15 @@ jobs:
           - "5432:5432"
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgres://postgres:@localhost:5432/test"
+      DATABASE_URL: postgresql://postgres:@localhost:5432/test
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@2b019609e2b0f1ea1a2bc8ca11cb82ab46ada124
-      with:
-        ruby-version: 3.1.2
-        bundler-cache: true
-    - name: Run Tests
-      run: |
-        bin/rails db:setup
-        bundle exec rake test
-
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@2b019609e2b0f1ea1a2bc8ca11cb82ab46ada124
+        with:
+          ruby-version: 3.1.2
+          bundler-cache: true
+      - name: Run Tests
+        run: |
+          bin/rails db:setup
+          bundle exec rake test
