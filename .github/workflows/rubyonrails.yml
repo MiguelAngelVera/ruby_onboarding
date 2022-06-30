@@ -20,8 +20,8 @@ jobs:
           - "5432:5432"
         env:
           #POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
+          POSTGRES_USER: ${{ secrets.DB_USERNAME }}
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
@@ -34,10 +34,10 @@ jobs:
         bundler-cache: true
     - name: Run Tests
       env:
-        DB_HOST: localhost
-        DB_DATABASE: rails_test
-        DB_USERNAME: rails
-        DB_PASSWORD: password
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_DATABASE: ${{ secrets.DB_DATABASE }}
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       run: |
         bin/rails db:setup
         bundle exec rake test
