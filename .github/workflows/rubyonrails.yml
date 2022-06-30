@@ -20,9 +20,6 @@ jobs:
           - "5432:5432"
         env:
           POSTGRES_USER: postgres
-    env:
-      RAILS_ENV: test
-      DATABASE_URL: postgresql://postgres:@localhost:5432/test
     steps:
       - uses: actions/checkout@v3
       - name: Set up Ruby
@@ -31,6 +28,9 @@ jobs:
           ruby-version: 3.1.2
           bundler-cache: true
       - name: Run Tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgresql://postgres:@localhost:5432/test
         run: |
           bin/rails db:setup
           bundle exec rake test
