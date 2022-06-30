@@ -40,3 +40,15 @@ jobs:
         run: |
           bin/rails db:setup
           bundle exec rake test
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@2b019609e2b0f1ea1a2bc8ca11cb82ab46ada124
+        with:
+          ruby-version: 3.1.2
+          bundler-cache: true
+      - name: Lint Ruby files
+        run bundle exec rubocop --parallel      
