@@ -32,13 +32,13 @@ jobs:
       with:
         ruby-version: 3.1.2
         bundler-cache: true
-    - name: Run tests
-          env:
+    - name: Run Tests
+         env:
             DB_HOST= localhost
             DB_DATABASE= rails_test
             DB_USERNAME= rails
             DB_PASSWORD= password
-          run: |
+         run: |
             bin/rails db:setup
             bundle exec rake test
 
