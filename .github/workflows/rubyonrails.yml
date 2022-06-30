@@ -18,13 +18,9 @@ jobs:
         image: postgres:11-alpine
         ports:
           - "5432:5432"
-        env:
-          #POSTGRES_DB: rails_test
-          POSTGRES_USER: ${{ secrets.DB_USERNAME }}
-          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+      DATABASE_URL: "postgres://postgres:@localhost:5432/test"
     steps:
     - uses: actions/checkout@v3
     - name: Set up Ruby
@@ -33,11 +29,6 @@ jobs:
         ruby-version: 3.1.2
         bundler-cache: true
     - name: Run Tests
-      env:
-        DB_HOST: ${{ secrets.DB_HOST }}
-        DB_DATABASE: ${{ secrets.DB_DATABASE }}
-        DB_USERNAME: ${{ secrets.DB_USERNAME }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       run: |
         bin/rails db:setup
         bundle exec rake test
