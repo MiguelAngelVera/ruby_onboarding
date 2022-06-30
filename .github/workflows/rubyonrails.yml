@@ -18,7 +18,8 @@ jobs:
         image: postgres:11-alpine
         ports:
           - "5432:5432"
-        env: POSTGRES_USER: postgres
+        env:
+          POSTGRES_USER: postgres
     env:
       RAILS_ENV: test
       DATABASE_URL: postgresql://postgres:@localhost:5432/test
