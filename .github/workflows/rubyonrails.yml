@@ -34,10 +34,10 @@ jobs:
         bundler-cache: true
     - name: Run Tests
       env:
-        DB_HOST= localhost
-        DB_DATABASE= rails_test
-        DB_USERNAME= rails
-        DB_PASSWORD= password
+        DB_HOST: localhost
+        DB_DATABASE: rails_test
+        DB_USERNAME: rails
+        DB_PASSWORD: password
       run: |
         bin/rails db:setup
         bundle exec rake test
