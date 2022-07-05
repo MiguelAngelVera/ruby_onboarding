@@ -7,9 +7,9 @@
 name: "Ruby on Rails CI"
 on:
   push:
-    branches: ["main"]
+    branches: ["development","main"]
   pull_request:
-    branches: ["main"]
+    branches: ["development","main"]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -31,7 +31,6 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@2b019609e2b0f1ea1a2bc8ca11cb82ab46ada124
         with:
-          ruby-version: 3.1.2
           bundler-cache: true
       - name: Run Tests
         env:
@@ -39,7 +38,7 @@ jobs:
           DATABASE_URL: postgresql://postgres:password@localhost:5432
         run: |
           bin/rails db:setup
-          bundle exec rake test
+          bundle exec rspec test
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -48,7 +47,6 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@2b019609e2b0f1ea1a2bc8ca11cb82ab46ada124
         with:
-          ruby-version: 3.1.2
           bundler-cache: true
       - name: Lint Ruby files
         run: |
